@@ -1,0 +1,28 @@
+{
+  "name": "build-a-blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-test": "nodemon dev-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avrabe/build-a-blockchain.git"
+  },
+  "keywords": [],
+  "author": "Ralf Anton Beier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avrabe/build-a-blockchain/issues"
+  },
+  "homepage": "https://github.com/avrabe/build-a-blockchain#readme",
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  },
+  "dependencies": {
+    "node-rsa": "^1.0.0",
+    "npm": "^6.0.1"
+  }
+}
