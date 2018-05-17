@@ -32,8 +32,6 @@ class Block {
         const lastHash = lastBlock.hash;
         const hash = Block.hash(timestamp, lastHash, data);
         return new this(timestamp, lastHash, hash, data);
-
-
     }
 
     static blockHash(block) {
@@ -41,9 +39,14 @@ class Block {
         return Block.hash(timestamp, lastHash, data);
     }
 
-    static isBlockValid(lastBlock) {
-        return !(this.lastHash !== lastBlock.hash || this.hash !== Block.blockHash(this))
+    static isSameGenesisBlock(block1, block2) {
+        return (JSON.stringify(block1) === JSON.stringify(block2));
     }
+
+    isBlockValid(lastBlock) {
+        return !(this.lastHash !== lastBlock.hash || this.hash !== Block.blockHash(this));
+    }
+
     static hash(timestamp, lastHash, data) {
         return sha256(`${timestamp}${lastHash}${data}`).toString();
     }

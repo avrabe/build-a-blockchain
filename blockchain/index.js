@@ -13,14 +13,12 @@ class Index {
     }
 
     isValidChain(chain) {
-        let ret = false;
-        if (JSON.stringify(chain[0]) === JSON.stringify(this.chain[0])) {
-            ret = true;
-            for (let i = 1; i < chain.length; i++) {
-                const block = chain[i];
-                const lastBlock = chain[i - 1];
-                ret = ret && block.isBlockValid(lastBlock);
-            }
+        let ret = true;
+        ret = ret && Block.isSameGenesisBlock(chain[0], this.chain[0]);
+        for (let i = 1; i < chain.length; i++) {
+            const block = chain[i];
+            const lastBlock = chain[i - 1];
+            ret = ret && block.isBlockValid(lastBlock);
         }
         return ret;
     }
