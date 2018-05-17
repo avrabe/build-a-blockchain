@@ -19,7 +19,7 @@ class Index {
             for (let i = 1; i < chain.length; i++) {
                 const block = chain[i];
                 const lastBlock = chain[i - 1];
-                ret = ret && !(block.lastHash !== lastBlock.hash || block.hash !== Block.blockHash(block));
+                ret = ret && block.isBlockValid(lastBlock);
             }
         }
         return ret;

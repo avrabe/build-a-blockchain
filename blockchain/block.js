@@ -41,6 +41,9 @@ class Block {
         return Block.hash(timestamp, lastHash, data);
     }
 
+    static isBlockValid(lastBlock) {
+        return !(this.lastHash !== lastBlock.hash || this.hash !== Block.blockHash(this))
+    }
     static hash(timestamp, lastHash, data) {
         return sha256(`${timestamp}${lastHash}${data}`).toString();
     }
