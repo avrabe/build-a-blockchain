@@ -1,5 +1,5 @@
 const NodeRSA = require("node-rsa");
-const Sha256 = require("crypto-js/sha256");
+const sha256 = require("crypto-js/sha256");
 
 class Block {
     constructor(timestamp, lastHash, hash, data) {
@@ -42,7 +42,7 @@ class Block {
     }
 
     static hash(timestamp, lastHash, data) {
-        return Sha256(`${timestamp}${lastHash}${data}`).toString();
+        return sha256(`${timestamp}${lastHash}${data}`).toString();
     }
 }
 

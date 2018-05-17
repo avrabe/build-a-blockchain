@@ -16,7 +16,6 @@ class Index {
         if (JSON.stringify(chain[0]) !== JSON.stringify(this.chain[0])) {
             return false;
         }
-        ;
 
         for (let i = 1; i < chain.length; i++) {
             const block = chain[i];
