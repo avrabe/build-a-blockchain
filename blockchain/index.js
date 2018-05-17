@@ -13,19 +13,19 @@ class Index {
     }
 
     isValidChain(chain) {
-        if (JSON.stringify(chain[0]) !== JSON.stringify(this.chain[0])) {
-            return false;
-        }
-
-        for (let i = 1; i < chain.length; i++) {
-            const block = chain[i];
-            const lastBlock = chain[i - 1];
-            if (block.lastHash !== lastBlock.hash ||
-                block.hash !== Block.blockHash(block)) {
-                return false;
+        let ret = false;
+        if (JSON.stringify(chain[0]) === JSON.stringify(this.chain[0])) {
+            for (let i = 1; i < chain.length; i++) {
+                const block = chain[i];
+                const lastBlock = chain[i - 1];
+                if (block.lastHash !== lastBlock.hash ||
+                    block.hash !== Block.blockHash(block)) {
+                    return false;
+                }
             }
+            ret = true;
         }
-        return true;
+        return ret;
     }
 
     replaceChain(newChain) {
