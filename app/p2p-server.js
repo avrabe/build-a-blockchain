@@ -12,13 +12,13 @@ class P2pServer {
 
     listen() {
         const server = new Websocket.Server({port: P2P_PORT});
-        server.on("connection", socket => this.connectSocket(socket));
+        server.on("connection", (socket) => this.connectSocket(socket));
         this.connectToPeers();
         console.log(`Listening for peer-to-peer connections on: ${P2P_PORT}`);
     }
 
     connectToPeers() {
-        peers.forEach(peer => {
+        peers.forEach((peer) => {
             const socket = new Websocket(peer);
             socket.on("open", () => this.connectSocket(socket));
         });
@@ -32,7 +32,7 @@ class P2pServer {
     }
 
     messageHandler(socket) {
-        socket.on("message", message => {
+        socket.on("message", (message) => {
             const data = JSON.parse(message);
             this.blockchain.replaceChain(data, !startWithRemoteBlockchain);
             startWithRemoteBlockchain = false;
@@ -44,7 +44,7 @@ class P2pServer {
     }
 
     syncChains() {
-        this.sockets.forEach(socket => {
+        this.sockets.forEach((socket) => {
             this.sendChain(socket);
         });
     }
