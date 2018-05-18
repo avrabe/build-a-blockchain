@@ -18,18 +18,20 @@ class Index {
         for (let i = 1; i < chain.length; i++) {
             const block = chain[i];
             const lastBlock = chain[i - 1];
-            ret = ret && block.isBlockValid(lastBlock);
+            ret = ret && Block.isBlockValid(block, lastBlock);
         }
         return ret;
     }
 
-    replaceChain(newChain) {
-        if (newChain.length <= this.chain.length) {
-            console.log("Received chain is not longer than the current chain");
-            return;
-        } else if (!this.isValidChain(newChain)) {
-            console.log("The received chain is not valid");
-            return;
+    replaceChain(newChain, checkValidity = true) {
+        if (checkValidity) {
+            if (newChain.length <= this.chain.length) {
+                console.log("Received chain is not longer than the current chain");
+                return;
+            } else if (!this.isValidChain(newChain)) {
+                console.log("The received chain is not valid");
+                return;
+            }
         }
         console.log("Replacing blockchain with new chain.");
         this.chain = newChain;

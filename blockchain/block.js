@@ -43,8 +43,8 @@ class Block {
         return (JSON.stringify(block1) === JSON.stringify(block2));
     }
 
-    isBlockValid(lastBlock) {
-        return !(this.lastHash !== lastBlock.hash || this.hash !== Block.blockHash(this));
+    static isBlockValid(block, lastBlock) {
+        return !(block.lastHash !== lastBlock.hash || block.hash !== Block.blockHash(block));
     }
 
     static hash(timestamp, lastHash, data) {
