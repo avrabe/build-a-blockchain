@@ -1,5 +1,6 @@
 const NodeRSA = require("node-rsa");
-const sha256 = require("crypto-js/sha256");
+const ChainUtil = require("../chain-util");
+
 const {DIFFICULTY, MINE_RATE} = require("../config");
 
 class Block {
@@ -44,7 +45,7 @@ class Block {
     }
 
     static hash(timestamp, lastHash, data, none, difficulty) {
-        return sha256(`${timestamp}${lastHash}${data}${none}${difficulty}`).toString();
+        return ChainUtil.hash(`${timestamp}${lastHash}${data}${none}${difficulty}`);
     }
 
     static isSameGenesisBlock(block1, block2) {
