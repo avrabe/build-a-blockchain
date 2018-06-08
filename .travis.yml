@@ -1,8 +1,12 @@
 language: node_js
 sudo: false
+cache:
+  directories:
+    - "node_modules"
 node_js:
-  - "4.1"
-  - "4.0"
+  - "node"
+  - "8.11"
+  - "7.0"
 install:
   - npm install
 script:
