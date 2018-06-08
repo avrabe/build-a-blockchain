@@ -14,7 +14,6 @@ class Index {
 
     isValidChain(chain) {
         let ret = true;
-
         chain.forEach(function (element, index) {
             if (index === 0) {
                 ret = ret && Block.isSameGenesisBlock(element, this.chain[0]);
