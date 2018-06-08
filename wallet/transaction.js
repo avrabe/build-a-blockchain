@@ -11,7 +11,7 @@ class Transaction {
         const transaction = new this();
         if (amount > senderWallet.balance) {
             console.log(`Amount: ${amount} exceeds balance ${senderWallet.balance}`);
-            return;
+            return null;
         }
         transaction.outputs.push(...[
             {amount: senderWallet.balance - amount, address: senderWallet.publicKey},
@@ -27,7 +27,7 @@ class Transaction {
             amount: senderWallet.balance,
             address: senderWallet.publicKey,
             signature: senderWallet.sign(ChainUtil.hash(transaction.outputs))
-        }
+        };
     }
 
     static verifyTransaction(transaction) {

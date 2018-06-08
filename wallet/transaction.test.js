@@ -12,7 +12,7 @@ describe("Transaction", () => {
     });
 
     it("outputs the 'amount' subtracted from the wallet balance", () => {
-        expect(transaction.outputs.find(output => output.address === wallet.publicKey).amount).toEqual(wallet.balance - amount);
+        expect(transaction.outputs.find((output) => output.address === wallet.publicKey).amount).toEqual(wallet.balance - amount);
     });
 
     it("inputs the balance of the wallet", () => {
@@ -20,7 +20,7 @@ describe("Transaction", () => {
     });
 
     it("outputs the 'amount' added to the recipient", () => {
-        expect(transaction.outputs.find(output => output.address === recipient).amount).toEqual(amount);
+        expect(transaction.outputs.find((output) => output.address === recipient).amount).toEqual(amount);
     });
 
     it("validates a valid transaction", () => {
@@ -41,8 +41,8 @@ describe("Transaction", () => {
         });
 
         it("does not create the transaction", () => {
-            expect(transaction).toEqual(undefined);
-        })
+            expect(transaction).toEqual(null);
+        });
     });
 
 });
