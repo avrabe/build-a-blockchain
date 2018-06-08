@@ -14,12 +14,16 @@ class Index {
 
     isValidChain(chain) {
         let ret = true;
-        ret = ret && Block.isSameGenesisBlock(chain[0], this.chain[0]);
-        for (let i = 1; i < chain.length; i++) {
-            const block = chain[i];
-            const lastBlock = chain[i - 1];
-            ret = ret && Block.isBlockValid(block, lastBlock);
-        }
+
+        chain.forEach(function (element, index) {
+            if (index === 0) {
+                ret = ret && Block.isSameGenesisBlock(element, this.chain[0]);
+            } else {
+                const lastBlock = chain[index - 1];
+                ret = ret && Block.isBlockValid(element, lastBlock);
+            }
+        }, this);
+
         return ret;
     }
 
