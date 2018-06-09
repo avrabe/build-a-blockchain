@@ -11,7 +11,7 @@ class Transaction {
         const senderOutput = this.outputs.find((output) => output.address === senderWallet.publicKey);
         if (amount > senderOutput.amount) {
             console.log(`Amount: ${amount} exceeds balannce`);
-            return
+            return;
         }
         senderOutput.amount = senderOutput.amount - amount;
         this.outputs.push({amount, address: recipient});
