@@ -4,8 +4,13 @@
 [![Build Status](https://travis-ci.org/avrabe/build-a-blockchain.svg?branch=master)](https://travis-ci.org/avrabe/build-a-blockchain)
 
 This is a implementation of a block chain algorithm based on the udemy class [Build a Blockchain and a Cryptocurrency from Scratch](https://www.udemy.com/build-blockchain/).
+The course repository with further information can also be found on github: https://github.com/15Dkatz/sf-chain-guides. 
 
 ## Setup
+Node.js is needed to run the code which can be downloaded [here](https://nodejs.org/en/). 
+It is recommended to use version 8 or higher.
+
+
 To start the initial client you have to setup following:
 
 ```javascript
