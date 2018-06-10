@@ -5,7 +5,7 @@ const peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
 const MESSAGE_TYPES = {
     chain: "CHAIM",
     transaction: "TRANSACTION",
-    clear_transactions: "CLEARTRANSACTIONS"
+    clearTransactions: "CLEARTRANSACTIONS"
 };
 
 let startWithRemoteBlockchain = !!process.env.INIT_WITH_REMOTE_BLOCKCHAIN;
@@ -56,7 +56,7 @@ class P2pServer {
                 case MESSAGE_TYPES.transaction:
                     this.transactionPool.updateOrAddTransaction(data.data);
                     break;
-                case MESSAGE_TYPES.clear_transactions:
+                case MESSAGE_TYPES.clearTransactions:
                     this.transactionPool.clear();
                     break;
             }
@@ -83,7 +83,7 @@ class P2pServer {
 
     broadcastClearTransaction() {
         this.sockets.forEach((socket) => socket.send(JSON.stringify({
-            type: MESSAGE_TYPES.clear_transactions
+            type: MESSAGE_TYPES.clearTransactions
         })));
     }
 

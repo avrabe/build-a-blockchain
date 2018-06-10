@@ -8,7 +8,7 @@ describe("TransactionPool", () => {
     beforeEach(() => {
         tp = new TransactionPool();
         wallet = new Wallet();
-        transaction = wallet.createTransaction("r4nd-4dr355", 30, tp)
+        transaction = wallet.createTransaction("r4nd-4dr355", 30, tp);
     });
 
     it("adds a transaction to the pool", () => {
@@ -50,6 +50,6 @@ describe("TransactionPool", () => {
 
         it("grabs valid transactions", () => {
             expect(tp.validTransactions()).toEqual(validTransactions);
-        })
+        });
     });
 });

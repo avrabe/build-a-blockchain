@@ -52,7 +52,7 @@ class Transaction {
     static rewardTransaction(minerWallet, blockChainWallet) {
         return Transaction.transactionWithOutputs(blockChainWallet, [
             {amount: MINING_REWARD, address: minerWallet.publicKey}
-        ])
+        ]);
     }
 
     static verifyTransaction(transaction) {

@@ -35,7 +35,7 @@ class TransactionPool {
             }
 
             return transaction;
-        })
+        });
     }
 
     clear() {
