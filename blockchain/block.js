@@ -18,7 +18,7 @@ class Block {
         const timestamp = Date.now();
         const text = "Genesis block!";
         const encrypted = key.encrypt(text, "base64");
-        const data = `${text} ${encrypted}`;
+        const data = [`${text} ${encrypted}`];
         const lastHash = "-------";
         const hash = Block.hash(timestamp, lastHash, data, 0);
         return new this(timestamp, lastHash, hash, data, 0, DIFFICULTY);
