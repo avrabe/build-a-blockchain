@@ -16,7 +16,9 @@
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/node_modules/**",
-      "!**/vendor/**"
+      "!**/vendor/**",
+      "!*dev-test.js",
+      "!**/coverage/**"
     ]
   },
   "repository": {
