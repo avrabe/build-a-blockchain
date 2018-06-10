@@ -2,11 +2,17 @@ const Websocket = require("ws");
 
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
-let startWithRemoteBlockchain = process.env.INIT_WITH_REMOTE_BLOCKCHAIN ? true : false;
+const MESSAGE_TYPES = {
+    chain: "CHAIM",
+    transaction: "TRANSACTION"
+};
+
+let startWithRemoteBlockchain = !!process.env.INIT_WITH_REMOTE_BLOCKCHAIN;
 
 class P2pServer {
-    constructor(blockchain) {
+    constructor(blockchain, transactionPool) {
         this.blockchain = blockchain;
+        this.transactionPool = transactionPool;
         this.sockets = [];
     }
 
@@ -31,22 +37,44 @@ class P2pServer {
         this.sendChain(socket);
     }
 
+    static sendTransaction(socket, transaction) {
+        socket.send(JSON.stringify({
+            type: MESSAGE_TYPES.transaction,
+            data: transaction
+        }));
+    }
+
     messageHandler(socket) {
         socket.on("message", (message) => {
             const data = JSON.parse(message);
-            this.blockchain.replaceChain(data, !startWithRemoteBlockchain);
-            startWithRemoteBlockchain = false;
+            switch (data.type) {
+                case MESSAGE_TYPES.chain:
+                    this.blockchain.replaceChain(data.data, !startWithRemoteBlockchain);
+                    startWithRemoteBlockchain = false;
+                    break;
+                case MESSAGE_TYPES.transaction:
+                    this.transactionPool.updateOrAddTransaction(data.data);
+                    break;
+            }
         });
-    }
-
-    sendChain(socket) {
-        socket.send(JSON.stringify(this.blockchain.chain));
     }
 
     syncChains() {
         this.sockets.forEach((socket) => {
             this.sendChain(socket);
         });
+    }
+
+    sendChain(socket) {
+        socket.send(JSON.stringify({
+                type: MESSAGE_TYPES.chain,
+                data: this.blockchain.chain
+            }
+        ));
+    }
+
+    broadcastTransaction(transaction) {
+        this.sockets.forEach((socket) => P2pServer.sendTransaction(socket, transaction));
     }
 }
 
